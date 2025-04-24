@@ -4,7 +4,11 @@ import UserDetailsPopover from "@/components/user-details-popover";
 import Link from "next/link";
 import { auth } from "../../auth";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
   const session = await auth();
   return (
     <div className="h-screen flex justify-center container mx-auto">
@@ -17,7 +21,7 @@ export default async function Home() {
           <span className="text-sm font-semibold"> - By Saurav Parajulee</span>
           <Link
             href="/protected-route"
-            className="underline block text-sm ml-2 text-blue-500"
+            className="underline block text-sm mt-12 ml-2 text-blue-500"
           >
             Try visiting this route{" "}
           </Link>
@@ -28,13 +32,12 @@ export default async function Home() {
               <p>Try Now.</p>
             )}
           </div>
-          <ul>
-            <h1 className="font-bold text-xl mt-12">Prerequisits:</h1>
-          </ul>
         </div>
         <div className="w-full">
           {/* <SignUpComponentClient /> */}
-          <SignUpComponentServer />
+          <SignUpComponentServer
+            errorMessage={(await searchParams).error as string}
+          />
         </div>
       </div>
     </div>

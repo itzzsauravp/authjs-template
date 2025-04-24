@@ -5,8 +5,36 @@ import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import { prisma } from "./prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import Credentials from "next-auth/providers/credentials";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
-  providers: [GitHub, Google, Discord],
+  providers: [
+    GitHub,
+    Google,
+    Discord,
+    Credentials({
+      credentials: {
+        email: {},
+        password: {},
+      },
+      authorize: async (credentials) => {
+        let user = null;
+        const pwHash = credentials.password; // hash later
+
+        user = await prisma.user.findFirst({
+          where: {
+            email: credentials.email as string,
+            // password: pwHash,
+          },
+        });
+        if (!user) {
+          console.log(
+            "============== No such user exits..... ================="
+          );
+        }
+        return user;
+      },
+    }),
+  ],
 });

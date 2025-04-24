@@ -8,8 +8,21 @@ import {
 } from "@/components/ui/card";
 import { InputWithLabel } from "@/components/ui/input";
 import OAuthSignInForm from "./authjs-sign-up-form";
+import { CredentialsSignIn } from "@/actions/auth";
+import { redirect } from "next/navigation";
 
-export default async function SignUpComponentServer() {
+const serverSignInAction = async (formData: FormData) => {
+  // add validation here later.
+  const result = await CredentialsSignIn(formData);
+  if (result?.error) {
+    redirect(`/?error=${encodeURIComponent(result.message)}`);
+  }
+};
+export default async function SignUpComponentServer({
+  errorMessage,
+}: {
+  errorMessage: string;
+}) {
   return (
     <>
       <Card>
@@ -18,10 +31,25 @@ export default async function SignUpComponentServer() {
             NextJs-AuthJs-Boiler-Plate (server)
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <InputWithLabel label="Email or Username" type="text" />
-          <InputWithLabel label="Password" type="password" />
-          <Button className="w-full">Sign In</Button>
+        {errorMessage && (
+          <h1 className=" text-center text-sm text-red-500 font-semibold">
+            {errorMessage}
+          </h1>
+        )}
+        <CardContent>
+          <form
+            action={async (formData) => {
+              "use server";
+              await serverSignInAction(formData);
+            }}
+            className="space-y-4"
+          >
+            <InputWithLabel label="Email" type="text" name="email" />
+            <InputWithLabel label="Password" type="password" name="password" />
+            <Button type="submit" className="w-full">
+              Sign In
+            </Button>
+          </form>
         </CardContent>
         <div className="flex items-center gap-2 w-[80%] my-3 mx-auto">
           <div className="w-1/2 bg-gray-500 h-[1px]"></div>

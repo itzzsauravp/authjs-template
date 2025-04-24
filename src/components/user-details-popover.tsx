@@ -1,3 +1,5 @@
+// Shows name, email, image on top right with a signout button.
+
 import {
   Popover,
   PopoverContent,
@@ -6,7 +8,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Session } from "next-auth";
-import { oAuthSignOut } from "@/actions/auth";
+import { AuthJsSignOut } from "@/actions/auth";
 
 export default async function UserDetailsPopover({
   session,
@@ -37,7 +39,7 @@ export default async function UserDetailsPopover({
           </span>
         </p>
         {session?.user && (
-          <form action={oAuthSignOut}>
+          <form action={AuthJsSignOut}>
             <Button className="w-full" type="submit">
               Sign out
             </Button>

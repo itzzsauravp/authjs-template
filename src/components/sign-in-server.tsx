@@ -1,3 +1,5 @@
+// Server side Signin Form
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { InputWithLabel } from "@/components/ui/input";
-import OAuthSignInForm from "./authjs-sign-up-form";
+import AuthJsSignInForm from "./authjs-sign-up-form";
 import { CredentialsSignIn } from "@/actions/auth";
 import { redirect } from "next/navigation";
 
@@ -59,10 +61,10 @@ export default async function SignUpComponentServer({
           <div className="w-1/2 bg-gray-500 h-[1px]"></div>
         </div>
         <CardFooter className="grid grid-cols-4 gap-2">
-          <OAuthSignInForm providersName="google" />
-          <OAuthSignInForm providersName="discord" />
-          <OAuthSignInForm providersName="github" />
-          <OAuthSignInForm providersName="X" />
+          <AuthJsSignInForm providersName="google" />
+          <AuthJsSignInForm providersName="discord" />
+          <AuthJsSignInForm providersName="github" />
+          <AuthJsSignInForm providersName="X" />
         </CardFooter>
       </Card>
     </>

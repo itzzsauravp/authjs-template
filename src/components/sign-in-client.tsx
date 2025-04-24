@@ -1,5 +1,7 @@
 "use client";
 
+// Client side Signin Form
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,7 +13,7 @@ import {
 import { InputWithLabel } from "@/components/ui/input";
 import { FaDiscord, FaGithub, FaGoogle } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import OAuthSignInButton from "./authjs-sign-up-button";
+import AuthJsSignInButton from "./authjs-sign-up-button";
 import { useState } from "react";
 import { CredentialsSignIn } from "@/actions/auth";
 
@@ -70,10 +72,13 @@ export default function SignUpComponentClient() {
       </div>
       <CardFooter className="grid grid-cols-4 gap-2">
         <div className="flex gap-2">
-          <OAuthSignInButton providerName="google" ProviderIcon={FaGoogle} />
-          <OAuthSignInButton providerName="discord" ProviderIcon={FaDiscord} />
-          <OAuthSignInButton providerName="github" ProviderIcon={FaGithub} />
-          <OAuthSignInButton providerName="twitter" ProviderIcon={FaXTwitter} />
+          <AuthJsSignInButton providerName="google" ProviderIcon={FaGoogle} />
+          <AuthJsSignInButton providerName="discord" ProviderIcon={FaDiscord} />
+          <AuthJsSignInButton providerName="github" ProviderIcon={FaGithub} />
+          <AuthJsSignInButton
+            providerName="twitter"
+            ProviderIcon={FaXTwitter}
+          />
         </div>
       </CardFooter>
     </Card>

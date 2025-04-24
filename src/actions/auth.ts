@@ -3,25 +3,17 @@
 import { signIn, signOut } from "../../auth";
 import { prisma } from "../../prisma";
 
-export const oAuthSignInServer = async (formData: FormData) => {
+export const AuthJsSignInServer = async (formData: FormData) => {
   const providersName = formData.get("provider") as string;
   await signIn(providersName);
 };
 
-export const oAuthSignOut = async () => {
+export const AuthJsSignOut = async () => {
   await signOut();
 };
 
-export const oAuthSignInClient = async (providersName: string) => {
-  console.log("foobar");
+export const AuthJsSignInClient = async (providersName: string) => {
   await signIn(providersName);
-};
-
-export const CredentialsSignInClient = async (credentails: {
-  email: string;
-  password: string;
-}) => {
-  await signIn("credentials", credentails);
 };
 
 export const CredentialsSignIn = async (formData: FormData) => {

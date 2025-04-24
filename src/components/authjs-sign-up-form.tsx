@@ -1,5 +1,9 @@
 "use client";
-import { oAuthSignInServer } from "@/actions/auth";
+
+// Every button you see on the signup server component is a form in itself.
+// This component will get the providers name from the FORM and based on that perform the signin.
+
+import { AuthJsSignInServer } from "@/actions/auth";
 import { Button } from "./ui/button";
 import { IconType } from "react-icons";
 import { FaDiscord, FaGithub, FaGoogle } from "react-icons/fa";
@@ -12,14 +16,14 @@ const providerIcons: Record<string, IconType> = {
   x: FaXTwitter,
 };
 
-export default function OAuthSignInForm({
+export default function AuthJsSignInForm({
   providersName,
 }: {
   providersName: string;
 }) {
   const Icon = providerIcons[providersName.toLowerCase()] || (() => null);
   return (
-    <form action={oAuthSignInServer} className="flex gap-2">
+    <form action={AuthJsSignInServer} className="flex gap-2">
       <input
         type="text"
         className="hidden"

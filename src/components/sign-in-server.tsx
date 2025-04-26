@@ -15,9 +15,15 @@ import { redirect } from "next/navigation";
 
 const serverSignInAction = async (formData: FormData) => {
   // add validation here later.
-  const result = await CredentialsSignIn(formData);
+  const email = String(formData.get("email"));
+  const password = String(formData.get("password"));
+  const result = await CredentialsSignIn({
+    email,
+    password,
+    redirect: false,
+  });
   if (result?.error) {
-    redirect(`/?error=${encodeURIComponent(result.message)}`);
+    redirect(`/?error=${encodeURIComponent(result.message!)}`);
   }
 };
 export default async function SignUpComponentServer({

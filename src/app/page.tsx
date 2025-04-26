@@ -10,6 +10,7 @@ export default async function Home({
   searchParams: Promise<{ error?: string }>;
 }) {
   const session = await auth();
+  console.log(session);
   return (
     <div className="h-screen flex justify-center container mx-auto">
       <div className="absolute top-4 right-4">

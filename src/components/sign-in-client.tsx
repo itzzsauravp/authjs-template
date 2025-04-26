@@ -16,15 +16,24 @@ import { FaXTwitter } from "react-icons/fa6";
 import AuthJsSignInButton from "./authjs-sign-up-button";
 import { useState } from "react";
 import { CredentialsSignIn } from "@/actions/auth";
+import { useSession } from "next-auth/react";
 
 export default function SignUpComponentClient() {
+  const { data: session, status } = useSession();
+  console.log(session, status);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
 
   const clientSignInAction = async (formData: FormData) => {
     // add validation here later.
-    const result = await CredentialsSignIn(formData);
+    const email = String(formData.get("email"));
+    const password = String(formData.get("password"));
+    const result = await CredentialsSignIn({
+      email,
+      password,
+      redirect: false,
+    });
     if (result?.error) {
       setError(result.message);
     }

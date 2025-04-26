@@ -1,5 +1,4 @@
 "use client";
-
 // Client side Signin Form
 
 import { Button } from "@/components/ui/button";
@@ -17,6 +16,7 @@ import AuthJsSignInButton from "./authjs-sign-up-button";
 import { useState } from "react";
 import { CredentialsSignIn } from "@/actions/auth";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function SignUpComponentClient() {
   const { data: session, status } = useSession();
@@ -36,14 +36,17 @@ export default function SignUpComponentClient() {
     });
     if (result?.error) {
       setError(result.message);
+    } else {
+      redirect("/");
     }
   };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-center font-bold text-2xl">
-          NextJs-AuthJs-Boiler-Plate (client)
+        <CardTitle className="text-center">
+          <h1 className="font-bold text-2xl">NextJs-AuthJs-Boiler-Plate</h1>
+          <p className="text-sm mt-2 font-semibold">(Client Component)</p>
         </CardTitle>
       </CardHeader>
       {error && (

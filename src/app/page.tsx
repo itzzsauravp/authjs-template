@@ -3,6 +3,7 @@ import SignUpComponentServer from "@/components/sign-in-server";
 import UserDetailsPopover from "@/components/user-details-popover";
 import Link from "next/link";
 import { auth } from "../../auth";
+import { Fingerprint } from "lucide-react";
 
 export default async function Home({
   searchParams,
@@ -10,10 +11,16 @@ export default async function Home({
   searchParams: Promise<{ error?: string }>;
 }) {
   const session = await auth();
-  console.log(session);
+  console.log("This is the current session: ", session);
   return (
     <div className="h-screen flex justify-center container mx-auto">
-      <div className="absolute top-4 right-4">
+      {session && (
+        <div className="fixed flex items-center gap-3 top-12">
+          <Fingerprint height={40} width={40} />
+          <span className="font-bold text-xl">You are Authenticated</span>
+        </div>
+      )}
+      <div className="fixed top-4 right-4">
         <UserDetailsPopover session={session} />
       </div>
       <div className="flex items-center justify-between w-full">

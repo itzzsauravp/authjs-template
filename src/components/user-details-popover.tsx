@@ -29,13 +29,17 @@ export default async function UserDetailsPopover({
         <p className="text-sm font-bold">
           Username:{" "}
           <span className="font-normal">
-            {session?.user?.name || "Sign in required*"}
+            {session && !session?.user?.name
+              ? "Not Available"
+              : "Sign in required*"}
           </span>
         </p>
         <p className="text-sm font-bold">
           Email:{" "}
           <span className="font-normal">
-            {session?.user?.email || "Sign in required*"}
+            {session && !session?.user?.email
+              ? "Not Available"
+              : "Sign in required*"}
           </span>
         </p>
         {session?.user && (

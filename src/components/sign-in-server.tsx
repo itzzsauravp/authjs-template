@@ -24,6 +24,8 @@ const serverSignInAction = async (formData: FormData) => {
   });
   if (result?.error) {
     redirect(`/?error=${encodeURIComponent(result.message!)}`);
+  } else {
+    redirect("/");
   }
 };
 export default async function SignUpComponentServer({
@@ -35,8 +37,9 @@ export default async function SignUpComponentServer({
     <>
       <Card>
         <CardHeader>
-          <CardTitle className="text-center font-bold text-2xl">
-            NextJs-AuthJs-Boiler-Plate (server)
+          <CardTitle className="text-center">
+            <h1 className="font-bold text-2xl">NextJs-AuthJs-Boiler-Plate</h1>
+            <p className="text-sm mt-2 font-semibold">(Server Component)</p>
           </CardTitle>
         </CardHeader>
         {errorMessage && (

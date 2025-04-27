@@ -73,7 +73,7 @@ export default async function SignUpComponentServer({
           <AuthJsSignInForm providersName="google" />
           <AuthJsSignInForm providersName="discord" />
           <AuthJsSignInForm providersName="github" />
-          <AuthJsSignInForm providersName="X" />
+          <AuthJsSignInForm providersName="twitter" />
         </CardFooter>
       </Card>
     </>

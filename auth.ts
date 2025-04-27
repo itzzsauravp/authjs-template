@@ -3,6 +3,7 @@ import NextAuth, { NextAuthConfig } from "next-auth";
 import Discord from "next-auth/providers/discord";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
+import Twitter from "next-auth/providers/twitter";
 import { prisma } from "./prisma";
 import { encode as defaultEncode } from "next-auth/jwt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -19,6 +20,7 @@ const nextAuthConfig: NextAuthConfig = {
     GitHub,
     Google,
     Discord,
+    Twitter,
     Credentials({
       credentials: {
         email: {},
@@ -45,7 +47,7 @@ const nextAuthConfig: NextAuthConfig = {
   ],
   // after successful login calls the jwt method, allows to modify the token before saving it.
   callbacks: {
-    async jwt({ token, _user, account }) {
+    async jwt({ token, user, account }) {
       if (account?.provider === "credentials") {
         token.credentials = true;
       }

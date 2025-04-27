@@ -13,7 +13,7 @@ const providerIcons: Record<string, IconType> = {
   github: FaGithub,
   google: FaGoogle,
   discord: FaDiscord,
-  x: FaXTwitter,
+  twitter: FaXTwitter,
 };
 
 export default function AuthJsSignInForm({

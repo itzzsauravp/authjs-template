@@ -43,3 +43,7 @@ export const CredentialsSignIn = async ({
   await signIn("credentials", { email, password, redirect });
   // return { error: false };
 };
+
+export const ResendSignInAction = async (formData: FormData) => {
+  await signIn("resend", formData);
+};

@@ -12,7 +12,7 @@ import {
 import { InputWithLabel } from "@/components/ui/input";
 import { FaDiscord, FaGithub, FaGoogle } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import AuthJsSignInButton from "./authjs-sign-up-button";
+import AuthJsSignInButton from "./authjs-sign-in-button";
 import { useState } from "react";
 import { CredentialsSignIn } from "@/actions/auth";
 import { useSession } from "next-auth/react";

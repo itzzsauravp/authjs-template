@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { InputWithLabel } from "@/components/ui/input";
-import AuthJsSignInForm from "./authjs-sign-up-form";
+import AuthJsSignInForm from "./authjs-sign-in-form";
 import { CredentialsSignIn } from "@/actions/auth";
 import { redirect } from "next/navigation";
 

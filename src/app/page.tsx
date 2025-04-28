@@ -1,9 +1,10 @@
 // import SignUpComponentClient from "@/components/sign-in-client";
-import SignUpComponentServer from "@/components/sign-in-server";
+// import SignUpComponentServer from "@/components/sign-in-server";
 import UserDetailsPopover from "@/components/user-details-popover";
 import Link from "next/link";
 import { auth } from "../../auth";
 import { Fingerprint } from "lucide-react";
+import ResendSignInComponent from "@/components/resend-magic-link";
 
 export default async function Home({
   searchParams,
@@ -11,7 +12,6 @@ export default async function Home({
   searchParams: Promise<{ error?: string }>;
 }) {
   const session = await auth();
-  console.log("This is the current session: ", session);
   return (
     <div className="h-screen flex justify-center container mx-auto">
       {session && (
@@ -43,9 +43,10 @@ export default async function Home({
         </div>
         <div className="w-full">
           {/* <SignUpComponentClient /> */}
-          <SignUpComponentServer
+          {/* <SignUpComponentServer
             errorMessage={(await searchParams).error as string}
-          />
+          /> */}
+          <ResendSignInComponent />
         </div>
       </div>
     </div>

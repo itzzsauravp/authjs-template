@@ -25,31 +25,34 @@ export default async function UserDetailsPopover({
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </PopoverTrigger>
-      <PopoverContent className="space-y-1">
-        <p className="text-sm font-bold">
-          Username:{" "}
-          <span className="font-normal">
-            {session && !session?.user?.name
-              ? "Not Available"
-              : "Sign in required*"}
-          </span>
-        </p>
-        <p className="text-sm font-bold">
-          Email:{" "}
-          <span className="font-normal">
-            {session && !session?.user?.email
-              ? "Not Available"
-              : "Sign in required*"}
-          </span>
-        </p>
-        {session?.user && (
-          <form action={AuthJsSignOut}>
-            <Button className="w-full" type="submit">
-              Sign out
-            </Button>
-          </form>
-        )}
-      </PopoverContent>
+      {session ? (
+        <PopoverContent className="space-y-1">
+          <p className="text-sm font-bold">
+            Username:{" "}
+            <span className="font-normal">{session?.user?.name || "N/A"}</span>
+          </p>
+          <p className="text-sm font-bold">
+            Email:{" "}
+            <span className="font-normal">{session?.user?.email || "N/A"}</span>
+          </p>
+          {session?.user && (
+            <form action={AuthJsSignOut}>
+              <Button className="w-full" type="submit">
+                Sign out
+              </Button>
+            </form>
+          )}
+        </PopoverContent>
+      ) : (
+        <PopoverContent className="space-y-1">
+          <p className="text-sm font-bold">
+            Username: <span className="font-normal">Sign In Required*</span>
+          </p>
+          <p className="text-sm font-bold">
+            Email: <span className="font-normal">Sign In Required*</span>
+          </p>
+        </PopoverContent>
+      )}
     </Popover>
   );
 }

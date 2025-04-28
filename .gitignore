@@ -46,4 +46,4 @@ next-env.d.ts
 prisma/migrations/
 
 # lol
-prompt.txt
+README.example.md

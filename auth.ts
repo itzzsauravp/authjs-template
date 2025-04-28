@@ -9,7 +9,7 @@ import { prisma } from "./prisma";
 import { encode as defaultEncode } from "next-auth/jwt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
-import { comparePW } from "@/lib/utils";
+import { comparePW, pwHash } from "@/lib/utils";
 import { randomUUID } from "node:crypto";
 
 const adapter = PrismaAdapter(prisma);
@@ -41,7 +41,18 @@ const nextAuthConfig: NextAuthConfig = {
           },
         });
 
-        if (!user || !user.password || !user.email) return null;
+        // Do this if you dont want to create a user at the login page, if the user doesnot exist
+        // if (!user || !user.password || !user.email) return null;
+
+        if (!user || !user.password || !user.email) {
+          const newlyCreatedUser = await prisma.user.create({
+            data: {
+              email: credentials.email as string,
+              password: await pwHash(credentials.password as string),
+            },
+          });
+          return newlyCreatedUser;
+        }
 
         if (!(await comparePW(credentials.password as string, user.password)))
           return null;

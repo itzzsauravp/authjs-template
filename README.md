@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Auth.Js Playground Template
 
-## Getting Started
+A simple and extensible playground for integrating Auth.js (NextAuth v5) in a Next.js app.
 
-First, run the development server:
+## Prerequisites
+
+Before you begin, make sure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [PostgreSQL](https://www.postgresql.org/) (any stable version)
+- [Git](https://git-scm.com/) (for cloning the repository)
+- [Prisma CLI](https://www.prisma.io/docs/reference/api-reference/command-reference#cli-commands) (installed automatically with dependencies)
+
+Optional:
+
+- A Resend account (for email sending)
+- OAuth provider accounts (GitHub, Google, Discord, etc.)
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1) git clone https://github.com/itzzsauravp/authjs-template .
+2) npm install
+3) npx prisma migrate dev --name init
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How to get started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy the `.env.local.example` to `.env.local` ( or just rename it )
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Visit those links and get you `ID` and `SECRET` and add then to your `.env.local` file, This is how it should look like:
 
-## Learn More
+```bash
+# File: .env.local
 
-To learn more about Next.js, take a look at the following resources:
+# Generate using -> npx auth secret (or can generate from anywhere)
+AUTH_SECRET=
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# https://github.com/settings/developers
+AUTH_GITHUB_ID=
+AUTH_GITHUB_SECRET=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# https://console.cloud.google.com/welcome/new
+AUTH_GOOGLE_ID=
+AUTH_GOOGLE_SECRET=
 
-## Deploy on Vercel
+# https://discord.com/developers/applications
+AUTH_DISCORD_ID=
+AUTH_DISCORD_SECRET=
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# https://developer.x.com
+AUTH_TWITTER_ID=
+AUTH_TWITTER_SECRET=
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# https://resend.com/
+AUTH_RESEND_KEY=
+RESEND_EMAIL_FROM='noreply@resend.dev'
+
+```
+
+Copy the `.env.example` to `.env` ( or just rename it )
+
+```bash
+# Set your <username>, <password>, and <db-name> here.
+# The "schema=public" is fine for most setups — unless you are using a custom PostgreSQL schema, you don't need to change it.
+DATABASE_URL="postgresql://<username>:<password>@localhost:5432/<db-name>?schema=public"
+
+```
+
+#### NOTE
+
+When working in a development environment, you most likely wont have a custom domain, and you dont really need one.
+For testing purposes, you can use the default `Resend Address`:
+
+```bash
+# File: .env.local
+
+RESEND_EMAIL_FROM=noreply@resend.dev
+```
+
+However, **_you can only send test emails to the email address you used to create your Resend account._**
+
+If you are using a `custom domain`, make sure to format the sender email like one of the following:
+
+```bash
+# File: .env.local
+# Only if you have a custom domain (or else stick with the noreply@resend.dev).
+
+RESEND_EMAIL_FROM=noreply@yourdomain.com
+```
+
+or
+
+```bash
+# File: .env.local
+# Only if you have a custom domain (or else stick with the noreply@resend.dev).
+
+RESEND_EMAIL_FROM="Name <noreply@yourdomain.com>"
+```
+
+You can put anything you want before the `@` (for example: `noreply`, `home`, `test`, etc), but after the `@` must be **_a valid domain_** that you own and have added to Resend.
+
+##### Remainder
+
+As of now, there is **no dedicated sign-up page -- only sign-in page.**
+This behavior is handled in the `auth.ts` file in the root of the project.
+
+```bash
+        # Do this if you dont want to create a user at the login page if the user doesnot exist
+        # if (!user || !user.password || !user.email) return null;
+
+        if (!user || !user.password || !user.email) {
+          const newlyCreatedUser = await prisma.user.create({
+            data: {
+              email: credentials.email as string,
+              password: await pwHash(credentials.password as string),
+            },
+          });
+          return newlyCreatedUser;
+        }
+```
+
+Currently, during login, **if the app cannot find a matching user in the database, it automatically create a new user** with the provided `email` and `password`.
+If you want to **disable this behavior**, simply:
+
+> - **Comment** out the user creation code, and
+> - **Uncomment** the line that returns `null` if no user is found.
+
+## Future Updates
+
+> - Email verification for OAuth and Credentials authentication
+> - Passkey (passwordless login) support
+> - Account linking for users authenticating with multiple providers

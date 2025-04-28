@@ -41,7 +41,6 @@ export const CredentialsSignIn = async ({
     console.log({ email, password, redirect });
   }
   await signIn("credentials", { email, password, redirect });
-  // return { error: false };
 };
 
 export const ResendSignInAction = async (formData: FormData) => {

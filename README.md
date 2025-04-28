@@ -28,7 +28,7 @@ Optional:
 
 Copy the `.env.local.example` to `.env.local` ( or just rename it )
 
-Visit those links and get you `ID` and `SECRET` and add then to your `.env.local` file, This is how it should look like:
+Visit these links and get you `ID` and `SECRET` and add then to your `.env.local` file, This is how it should look like:
 
 ```bash
 # File: .env.local

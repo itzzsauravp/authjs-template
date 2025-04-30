@@ -15,13 +15,10 @@ import { FaXTwitter } from "react-icons/fa6";
 import AuthJsSignInButton from "./authjs-sign-in-button";
 import { useState } from "react";
 import { CredentialsSignIn } from "@/actions/auth";
-import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import PassKeySignIn from "./passkey-sign-in-button";
 
 export default function SignUpComponentClient() {
-  const { data: session, status } = useSession();
-  console.log(session, status);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");

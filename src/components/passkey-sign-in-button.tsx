@@ -13,12 +13,17 @@ export default function PassKeySignIn() {
       {status === "authenticated" ? (
         <Button
           className="w-full"
+          type="button"
           onClick={() => signIn("passkey", { action: "register" })}
         >
           Register Passkey
         </Button>
       ) : status === "unauthenticated" ? (
-        <Button className="w-full" onClick={() => signIn("passkey")}>
+        <Button
+          type="button"
+          className="w-full"
+          onClick={() => signIn("passkey")}
+        >
           Use Passkey
         </Button>
       ) : null}

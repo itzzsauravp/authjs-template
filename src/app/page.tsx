@@ -1,5 +1,5 @@
-import SignUpComponentClient from "@/components/sign-in-client";
-// import SignUpComponentServer from "@/components/sign-in-server";
+// import SignUpComponentClient from "@/components/sign-in-client";
+import SignUpComponentServer from "@/components/sign-in-server";
 // import ResendSignInComponent from "@/components/resend-magic-link";
 import UserDetailsPopover from "@/components/user-details-popover";
 import Link from "next/link";
@@ -42,10 +42,10 @@ export default async function Home({
           </div>
         </div>
         <div className="w-full">
-          <SignUpComponentClient />
-          {/* <SignUpComponentServer
+          {/* <SignUpComponentClient /> */}
+          <SignUpComponentServer
             errorMessage={(await searchParams).error as string}
-          /> */}
+          />
           {/* <ResendSignInComponent /> */}
         </div>
       </div>

@@ -128,5 +128,4 @@ If you want to **disable this behavior**, simply:
 
 ## Future Updates
 
-> - Email verification for OAuth and Credentials authentication
 > - Account linking for users authenticating with multiple providers

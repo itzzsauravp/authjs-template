@@ -1,5 +1,3 @@
-"use client";
-
 // Every button you see on the signup server component is a form in itself.
 // This component will get the providers name from the FORM and based on that perform the signin.
 

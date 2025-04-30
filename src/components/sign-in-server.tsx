@@ -12,6 +12,7 @@ import { InputWithLabel } from "@/components/ui/input";
 import AuthJsSignInForm from "./authjs-sign-in-form";
 import { CredentialsSignIn } from "@/actions/auth";
 import { redirect } from "next/navigation";
+import PassKeySignIn from "./passkey-sign-in-button";
 
 const serverSignInAction = async (formData: FormData) => {
   // add validation here later.
@@ -60,6 +61,7 @@ export default async function SignUpComponentServer({
             <Button type="submit" className="w-full">
               Sign In
             </Button>
+            <PassKeySignIn />
           </form>
         </CardContent>
         <div className="flex items-center gap-2 w-[80%] my-3 mx-auto">

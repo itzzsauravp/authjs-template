@@ -5,6 +5,7 @@ import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import Twitter from "next-auth/providers/twitter";
 import Resend from "next-auth/providers/resend";
+import Passkey from "next-auth/providers/passkey";
 import { prisma } from "./prisma";
 import { encode as defaultEncode } from "next-auth/jwt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -17,6 +18,7 @@ const adapter = PrismaAdapter(prisma);
 // config
 const nextAuthConfig: NextAuthConfig = {
   adapter,
+  experimental: { enableWebAuthn: true },
   providers: [
     GitHub,
     Resend({
@@ -26,6 +28,7 @@ const nextAuthConfig: NextAuthConfig = {
     Google,
     Discord,
     Twitter,
+    Passkey,
     Credentials({
       credentials: {
         email: {},

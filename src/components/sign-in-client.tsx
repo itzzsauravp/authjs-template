@@ -17,6 +17,7 @@ import { useState } from "react";
 import { CredentialsSignIn } from "@/actions/auth";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import PassKeySignIn from "./passkey-sign-in-button";
 
 export default function SignUpComponentClient() {
   const { data: session, status } = useSession();
@@ -73,6 +74,7 @@ export default function SignUpComponentClient() {
           <Button type="submit" className="w-full">
             Sign In
           </Button>
+          <PassKeySignIn />
         </form>
       </CardContent>
       <div className="flex items-center gap-2 w-[80%] my-3 mx-auto">

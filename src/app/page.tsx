@@ -1,10 +1,10 @@
-// import SignUpComponentClient from "@/components/sign-in-client";
+import SignUpComponentClient from "@/components/sign-in-client";
 // import SignUpComponentServer from "@/components/sign-in-server";
+// import ResendSignInComponent from "@/components/resend-magic-link";
 import UserDetailsPopover from "@/components/user-details-popover";
 import Link from "next/link";
 import { auth } from "../../auth";
 import { Fingerprint } from "lucide-react";
-import ResendSignInComponent from "@/components/resend-magic-link";
 
 export default async function Home({
   searchParams,
@@ -25,7 +25,7 @@ export default async function Home({
       </div>
       <div className="flex items-center justify-between w-full">
         <div className="w-full">
-          <h1 className="font-bold text-3xl">Auth.Js (v5) Boiler Plate</h1>
+          <h1 className="font-bold text-3xl">Auth.Js (v5) Template</h1>
           <span className="text-sm font-semibold"> - By Saurav Parajulee</span>
           <Link
             href="/protected-route"
@@ -42,11 +42,11 @@ export default async function Home({
           </div>
         </div>
         <div className="w-full">
-          {/* <SignUpComponentClient /> */}
+          <SignUpComponentClient />
           {/* <SignUpComponentServer
             errorMessage={(await searchParams).error as string}
           /> */}
-          <ResendSignInComponent />
+          {/* <ResendSignInComponent /> */}
         </div>
       </div>
     </div>

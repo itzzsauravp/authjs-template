@@ -3,6 +3,7 @@
 import { comparePW } from "@/lib/utils";
 import { signIn, signOut } from "../../auth";
 import { prisma } from "../../prisma";
+import { signIn as passkeySignIn } from "next-auth/webauthn";
 
 export const AuthJsSignInServer = async (formData: FormData) => {
   const providersName = formData.get("provider") as string;
@@ -45,4 +46,12 @@ export const CredentialsSignIn = async ({
 
 export const ResendSignInAction = async (formData: FormData) => {
   await signIn("resend", formData);
+};
+
+export const PasskeyRegister = async () => {
+  await passkeySignIn("passkey", { action: "register" });
+};
+
+export const PassKeySignIn = async () => {
+  await passkeySignIn("passkey");
 };
